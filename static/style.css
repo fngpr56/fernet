@@ -65,8 +65,8 @@ h1 { margin: 28px 0 21px; font-size: clamp(50px, 5.7vw, 92px); line-height: .99;
 h1 span:not(.red) { color: var(--red); }
 .hero-caption { font-size: 11px; }
 .hero-art { width: clamp(220px, 29vw, 380px); height: 380px; flex: 0 0 auto; position: relative; align-self: center; }
-.red-block { background: var(--red); width: 69%; height: 56%; position: absolute; top: 11%; right: 3%; }
-.hero-art img { position: absolute; width: 100%; height: 95%; object-fit: contain; left: 0; top: 0; filter: grayscale(1); }
+.red-block { background: var(--red); width: 69%; height: 56%; position: absolute; top: 11%; right: 15%; }
+.hero-art img { position: absolute; width: 100%; height: 95%; object-fit: contain; left: 0; top: 0; filter: grayscale(1); transform: scaleX(-1); }
 .art-index { position: absolute; right: 0; bottom: 4%; font-size: 9px; }
 
 .info-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 10px; }

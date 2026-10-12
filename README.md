@@ -1,6 +1,7 @@
-# Web Portal
+# Fernet
 
-Personal website and future home for my projects, homelab, and other things I host.
+Personal website and future home for my projects, homelab, and other self-hosted services.
+The name Fernet comes from a drink: a bitter, aromatic Italian herbal liqueur (amaro), usually containing around 40% alcohol by volume.
 
 **Website:** https://fngpr.eu  
 **Status:** v0.1 — homepage
@@ -9,28 +10,31 @@ Personal website and future home for my projects, homelab, and other things I ho
 
 - **Backend:** Python, Flask, Jinja2
 - **Frontend:** HTML, plain CSS
-- **Production:** Gunicorn, Caddy, systemd
+- **Deployment:** Docker Compose, Gunicorn, Caddy
 - **DNS:** Porkbun
 
-No database, JavaScript framework, or build step yet.
+No database, JavaScript framework, or build step for the frontend.
 
 ## Project structure
 
 ```text
-fngpr-home/
-├── app.py                 # Flask routes
-├── requirements.txt       # Python dependencies
-├── templates/
-│   └── index.html         # Homepage
-├── static/
-│   ├── style.css          # Layout and styling
-│   └── dead-king.png      # Homepage artwork
-└── README.md
+fernet/
+  app.py
+  requirements.txt
+  Dockerfile
+  compose.yaml
+  .dockerignore
+  README.md
+  templates/
+    index.html
+  static/
+    style.css
+    dead-king.png
 ```
 
 ## Run locally
 
-From the project directory:
+For development without Docker:
 
 ```bash
 python3 -m venv .venv
@@ -40,15 +44,23 @@ python3 -m venv .venv
 
 Open http://127.0.0.1:5000.
 
-## Server deployment
+Or build and run with Docker:
 
-The project is hosted on my Ubuntu server at `/home/fngpr/fngpr-home`.
-
-```text
-fngpr.eu → Caddy (HTTPS) → Gunicorn (127.0.0.1:8000) → Flask
+```bash
+docker compose up -d --build
 ```
 
-Caddy site block (`/etc/caddy/Caddyfile`):
+Open http://127.0.0.1:8000 on the machine running Docker.
+
+## Server deployment
+
+The project is hosted on my Ubuntu server at `/home/fngpr/fernet`.
+
+```text
+fngpr.eu → Caddy (HTTPS) → Docker (127.0.0.1:8000) → Gunicorn → Flask
+```
+
+Caddy runs on the host. Its site block in `/etc/caddy/Caddyfile`:
 
 ```caddyfile
 fngpr.eu {
@@ -56,19 +68,37 @@ fngpr.eu {
 }
 ```
 
-The Flask app runs as the `fngpr-home` systemd service.
+Docker Compose runs the Flask app. Port 8000 is bound to the host's loopback address, so Caddy is the public entry point.
 
-Useful commands:
+From the project directory:
 
 ```bash
-sudo systemctl status fngpr-home
-sudo systemctl restart fngpr-home
-journalctl -u fngpr-home -f
+# Start or rebuild after changes
+docker compose up -d --build
+
+# Check status
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# Restart without rebuilding
+docker compose restart
+
+# Stop
+docker compose down
+```
+
+The application container uses `restart: unless-stopped` to start again after a reboot when Docker starts.
+
+Caddy commands:
+
+```bash
 sudo caddy validate --config /etc/caddy/Caddyfile
 sudo systemctl reload caddy
 ```
 
-After changing Python code, restart `fngpr-home`. HTML/CSS changes normally only require refreshing the browser (possibly bypassing cache).
+Code, HTML, and CSS are copied into the Docker image, so rebuild after editing them with `docker compose up -d --build`. You may need to refresh the browser cache for CSS changes.
 
 ## Current features
 
@@ -87,4 +117,4 @@ After changing Python code, restart `fngpr-home`. HTML/CSS changes normally only
 
 ## Notes
 
-Keep the site simple. Add libraries and infrastructure only when a feature actually needs them. Update this README whenever the setup or functionality changes.
+Keep the site simple. Add libraries and infrastructure only when needed, and update this README as the project grows.
