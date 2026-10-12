@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dededa">
+  <meta name="description" content="FNGPR's personal corner of the web. Linux, music, cybersecurity, and self-hosting.">
+  <title>fngpr. / personal space</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand"><span class="brand-mark"></span>fngpr<span class="red">.</span></div>
+      <div class="nav-label">01 / INDEX</div>
+
+      <nav class="nav" aria-label="Main menu">
+        <a class="nav-item active" href="/" aria-current="page"><span>HOME</span><span>01</span></a>
+        <button class="nav-item" type="button" disabled><span>ABOUT</span><span class="soon">SOON</span></button>
+        <button class="nav-item" type="button" disabled><span>PROJECTS</span><span class="soon">SOON</span></button>
+        <button class="nav-item" type="button" disabled><span>HOMELAB</span><span class="soon">SOON</span></button>
+        <button class="nav-item" type="button" disabled><span>MUSIC</span><span class="soon">SOON</span></button>
+        <button class="nav-item" type="button" disabled><span>LINKS</span><span class="soon">SOON</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="tiny-rule"></div>
+        <div>PERSONAL SPACE<br>ON THE OPEN WEB.</div>
+        <div class="sidebar-domain">fngpr.eu</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <span>PERSONAL / HOMEPAGE</span>
+        <span>EST. 2026&nbsp;&nbsp; ↗</span>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="square"></span> INDEX / 001</p>
+          <h1 id="hero-title">A quieter<br><span>corner of</span><br>the internet<span class="red">.</span></h1>
+          <p class="hero-caption">MY SPACE. MY FILES. MY RULES.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="red-block"></div>
+          <img src="{{ url_for('static', filename='dead-king.png') }}" alt="">
+          <span class="art-index">FIG. 01 / THE DEAD KING</span>
+        </div>
+      </section>
+
+      <section class="info-grid" aria-label="About this website">
+        <article class="panel about">
+          <div class="panel-heading"><span><b class="red">■</b> ABOUT ME</span><span>01 / 03</span></div>
+          <h2>Hi, I'm <span class="red">fngpr.</span></h2>
+          <p>Cybersecurity student, Linux enthusiast, and someone who likes keeping things on his own server.</p>
+          <p>I build things, listen to music, break things, and occasionally fix them.</p>
+        </article>
+
+        <article class="panel interests">
+          <div class="panel-heading"><span><b class="red">■</b> INTERESTS</span><span>02 / 03</span></div>
+          <div class="interest-list">
+            <div><span>01</span> LINUX / OPEN SOURCE</div>
+            <div><span>02</span> CYBERSECURITY</div>
+            <div><span>03</span> MUSIC / MEDIA</div>
+            <div><span>04</span> SELF-HOSTING</div>
+          </div>
+        </article>
+
+        <article class="panel purpose">
+          <div class="panel-heading"><span><b class="red">■</b> THIS PLACE</span><span>03 / 03</span></div>
+          <p>A personal website today. Projects, homelab, and other experiments tomorrow.</p>
+          <div class="purpose-end"><span class="red-dot"></span> UNDER CONSTRUCTION</div>
+        </article>
+      </section>
+
+      <footer class="footer"><span>FNGPR © 2026</span><span>BUILT BY HAND, NOT BY COMMITTEE.</span></footer>
+    </main>
+  </div>
+</body>
+</html>
